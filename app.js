@@ -42,10 +42,11 @@ document.getElementById('victor-btn').addEventListener('click', function() {
 
 document.getElementById('btn-calculate').addEventListener('click', function() {
     const players = document.getElementById('list').childNodes.length - 1;
-    const costPerPlayer = parseFloat(document.getElementById('player-cost').value);
+    const costPerPlayer = document.getElementById('player-cost').value;
     if (isNaN(costPerPlayer)) {
         alert('Please enter a valid number');
         document.getElementById('player-cost').value = '';
+        document.getElementById('player-expenses').innerHTML = '';
     } else {
         const playersExpenses = players * costPerPlayer;
         document.getElementById('player-expenses').innerHTML = playersExpenses;
@@ -53,3 +54,20 @@ document.getElementById('btn-calculate').addEventListener('click', function() {
 })
 
 // Total Calculation
+document.getElementById('total-calculate-btn').addEventListener('click', function() {
+    const playersExpenses = parseFloat(document.getElementById('player-expenses').innerHTML);
+    const managerCostString = document.getElementById('manager-cost').value;
+    const coachCostString = document.getElementById('coach-cost').value;
+    if (isNaN(managerCostString)) {
+        alert('Please enter a valid number in manager cost field');
+        document.getElementById('manager-cost').value = '';
+    } else if (isNaN(coachCostString)) {
+        alert('Please enter a valid number in coach cost field');
+        document.getElementById('coach-cost').value = '';
+    } else {
+        const managerCost = parseFloat(managerCostString);
+        const coachCost = parseFloat(coachCostString);
+        const totalExpenses = playersExpenses + managerCost + coachCost;
+        document.getElementById('total-expenses').innerHTML = totalExpenses;
+    }
+})
