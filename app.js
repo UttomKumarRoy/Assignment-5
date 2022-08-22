@@ -65,16 +65,20 @@ document.getElementById('btn-calculate').addEventListener('click', function() {
 
 // Total Calculation
 document.getElementById('total-calculate-btn').addEventListener('click', function() {
-    const playersExpenses = parseFloat(document.getElementById('player-expenses').innerHTML);
+    const playersExpensesString = document.getElementById('player-expenses').innerHTML;
     const managerCostString = document.getElementById('manager-cost').value;
     const coachCostString = document.getElementById('coach-cost').value;
-    if (isNaN(managerCostString)) {
+    if (playersExpensesString === '') {
+        alert('Please calculate the players expenses first');
+        document.getElementById('player-expenses').innerHTML = '';
+    } else if (isNaN(managerCostString)) {
         alert('Please enter a valid number in manager cost field');
         document.getElementById('manager-cost').value = '';
     } else if (isNaN(coachCostString)) {
         alert('Please enter a valid number in coach cost field');
         document.getElementById('coach-cost').value = '';
     } else {
+        const playersExpenses = parseFloat(playersExpensesString);
         const managerCost = parseFloat(managerCostString);
         const coachCost = parseFloat(coachCostString);
         const totalExpenses = playersExpenses + managerCost + coachCost;
