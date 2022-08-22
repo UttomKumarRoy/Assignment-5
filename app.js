@@ -1,16 +1,26 @@
+//Onload event handler is used for reload the page
+window.onload = () => {
+    document.getElementById('player-cost').value = '';
+    document.getElementById('player-expenses').innerHTML = '';
+    document.getElementById('manager-cost').value = '';
+    document.getElementById('coach-cost').value = '';
+    document.getElementById('total-expenses').innerHTML = '';
+}
+
 // Common Function for ordered list
 function addList(btn, name) {
-    const list = document.querySelector('#list');
+    const list = document.getElementById('list');
     const data = document.getElementById(name).innerText;
     const li = document.createElement('li');
     li.innerHTML = data;
-    let numb = list.childNodes.length;
-    if (numb >= 6) {
-        alert("You can not select more than 5 players. ")
-    } else {
+    const num = list.children.length;
+    if (num < 5) {
         list.appendChild(li);
+        document.getElementById(btn).setAttribute('disabled', true);
+    } else {
+        alert("You can not select more than 5 players. ");
     }
-    document.getElementById(btn).setAttribute('disabled', true);
+
 }
 
 // Players add Event Listener
@@ -41,7 +51,7 @@ document.getElementById('victor-btn').addEventListener('click', function() {
 //Budget Calculation
 
 document.getElementById('btn-calculate').addEventListener('click', function() {
-    const players = document.getElementById('list').childNodes.length - 1;
+    const players = document.getElementById('list').children.length;
     const costPerPlayer = document.getElementById('player-cost').value;
     if (isNaN(costPerPlayer)) {
         alert('Please enter a valid number');
